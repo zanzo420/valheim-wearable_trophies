@@ -1,14 +1,24 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace WearableTrophies {
   public class ChangeEquipment : MonoBehaviour {
-    private static void ChangeBeard(Character obj, string item) {
-      if (obj == null) return;
-      var equipment = obj.GetComponent<VisEquipment>();
-      if (equipment == null) return;
-      equipment.SetBeardItem(item);
+    private static Stack<string> UndoCommands = new Stack<string>();
+    private static void SetVisualValue(VisSlot slot, Terminal.ConsoleEventArgs args) {
+      var value = string.Join(" ", args.Args.Skip(1));
+      var setting = Settings.GetSettingBySlot(slot);
+      var previous = setting.Value;
+      UndoCommands.Push(args[0] + " " + previous);
+      setting.Value = value;
+    }
+    private static void SetColorValue(VisSlot slot, Terminal.ConsoleEventArgs args) {
+      var value = string.Join(" ", args.Args.Skip(1));
+      var setting = slot == VisSlot.Hair ? Settings.configVisualHairColor : Settings.configVisualSkinColor;
+      var previous = setting.Value;
+      UndoCommands.Push(args[0] + " " + previous);
+      setting.Value = value;
     }
     private static string SlotToString(VisSlot slot) {
       switch (slot) {
@@ -39,11 +49,7 @@ namespace WearableTrophies {
     }
     private static void CreateCommand(VisSlot slot) {
       new Terminal.ConsoleCommand("wear_" + SlotToString(slot), "[item name] [variant = 0] - Changes visual equipment.", delegate (Terminal.ConsoleEventArgs args) {
-        var value = "";
-        if (args.Args.Length > 0) value = args[1];
-        var variant = args.TryParameterInt(2, 0);
-        if (variant > 0) value += "|" + variant;
-        Settings.GetSettingBySlot(slot).Value = value;
+        SetVisualValue(slot, args);
       }, false, false, false, false, false, () => Data.Items);
     }
     public static void AddChangeEquipment() {
@@ -62,7 +68,8 @@ namespace WearableTrophies {
         args.Context.AddString("Right back: " + equipment.m_rightBackItem);
         args.Context.AddString("Hair: " + equipment.m_hairItem);
         args.Context.AddString("Beard: " + equipment.m_beardItem);
-        args.Context.AddString("Skin: " + equipment.m_skinColor.ToString("F0"));
+        args.Context.AddString("Skin: " + equipment.m_skinColor.ToString("F2"));
+        args.Context.AddString("Hair color: " + equipment.m_hairColor.ToString("F2"));
       }, false, false, false, false, false);
       new Terminal.ConsoleCommand("wear_reset", "Resets visual equipment.", delegate (Terminal.ConsoleEventArgs args) {
         Settings.GetSettingBySlot(VisSlot.BackLeft).Value = "";
@@ -79,32 +86,38 @@ namespace WearableTrophies {
         Settings.configVisualHairColor.Value = "";
         Settings.configVisualSkinColor.Value = "";
       }, false, false, false, false, false);
-      new Terminal.ConsoleCommand("wear_skin_color", "[r] [g] [b] - Changes skin color.", delegate (Terminal.ConsoleEventArgs args) {
-        Settings.configVisualSkinColor.Value = string.Join(",", args.Args.Skip(1));
+      new Terminal.ConsoleCommand("wear_skin_color", "[r1,g1,b1] [r2,g2,b2] ... - Changes skin color. Automatically cycles between multiple values.", delegate (Terminal.ConsoleEventArgs args) {
+        SetColorValue(VisSlot.Legs, args);
       }, false, false, false, false, false);
-      new Terminal.ConsoleCommand("wear_hair_color", "[r] [g] [b] - Changes hair color.", delegate (Terminal.ConsoleEventArgs args) {
-        Settings.configVisualHairColor.Value = string.Join(",", args.Args.Skip(1));
+      new Terminal.ConsoleCommand("wear_hair_color", "[r1,g1,b1] [r2,g2,b2] ... - Changes hair color. Automatically cycles between multiple values.", delegate (Terminal.ConsoleEventArgs args) {
+        SetColorValue(VisSlot.Hair, args);
       }, false, false, false, false, false);
-      new Terminal.ConsoleCommand("wearp_beard", "[name] - Changes beard.", delegate (Terminal.ConsoleEventArgs args) {
-        var value = "";
-        if (args.Args.Length > 0) value = args[1];
-        var variant = args.TryParameterInt(2, 0);
-        if (variant > 0) value += "|" + variant;
-        Settings.GetSettingBySlot(VisSlot.Beard).Value = value;
+      new Terminal.ConsoleCommand("wear_beard", "[name] - Changes beard.", delegate (Terminal.ConsoleEventArgs args) {
+        SetVisualValue(VisSlot.Beard, args);
       }, false, false, false, false, false, () => Data.Beards);
       new Terminal.ConsoleCommand("wear_hair", "[name] - Changes hair.", delegate (Terminal.ConsoleEventArgs args) {
-        var value = "";
-        if (args.Args.Length > 0) value = args[1];
-        var variant = args.TryParameterInt(2, 0);
-        if (variant > 0) value += "|" + variant;
-        Settings.GetSettingBySlot(VisSlot.Hair).Value = value;
+        SetVisualValue(VisSlot.Hair, args);
       }, false, false, false, false, false, () => Data.Hairs);
       new Terminal.ConsoleCommand("wear_bind", "[item name] [visual name] [variant = 0] - Binds a visual to an equipment.", delegate (Terminal.ConsoleEventArgs args) {
         if (args.Length < 2) return;
         var value = "";
         if (args.Args.Length > 1) value = args[2];
         var variant = args.TryParameterInt(3, 0);
-        Settings.Overrides[args[1]] = Tuple.Create(value, variant);
+        if (Settings.Overrides.TryGetValue(args[1], out var previous))
+          UndoCommands.Push(args[0] + " " + args[1] + " " + previous.Item1 + " " + previous.Item2);
+        else UndoCommands.Push(args[0] + " " + args[1]);
+        Settings.UpdateOverrides(args[1], value, variant);
+      }, false, false, false, false, false, () => Data.Items);
+      new Terminal.ConsoleCommand("wear_undo", "Reverts wear commands.", delegate (Terminal.ConsoleEventArgs args) {
+        if (UndoCommands.Count == 0) {
+          args.Context.AddString("Nothing to undo.");
+          return;
+        }
+        var command = UndoCommands.Pop();
+        args.Context.TryRunCommand(command);
+        // Removes the undo step caused by the undo.
+        if (UndoCommands.Count > 0)
+          UndoCommands.Pop();
       }, false, false, false, false, false, () => Data.Items);
       CreateCommand(VisSlot.BackLeft);
       CreateCommand(VisSlot.BackRight);

@@ -1,0 +1,74 @@
+# Wearable trophies
+
+This client side mod allows equipping trophies from the inventory.
+
+Additionally includes commands to use visual style of most items (including NPC items) or change skin color.
+
+The changes done by the mod are also visible to un-modded clients.
+
+
+# Manual Installation:
+
+1. Install the [BepInExPack Valheim](https://valheim.thunderstore.io/package/denikson/BepInExPack_Valheim)
+2. Download the latest zip
+3. Extract it in the \<GameDirectory\>\BepInEx\plugins\ folder.
+4. Optionally also install the [Configuration manager](https://github.com/BepInEx/BepInEx.ConfigurationManager/releases/tag/v16.4).
+
+# Features
+
+- Equip any tropby from the inventory to visually replace the helmet (while still keeping the stats).
+- Replace visual style of any equipment with commands (while still keeping the stats).
+- Change hair or skin color, with automatic color cycling.
+- Bind visual style to specific equipment to automatically apply it.
+
+Note: Using some items can print warnings to the console but this should be harmless.
+
+# Commands
+
+## wear_bind [item name] [visual name] [variant = 0]
+
+Binds visual style to an item. Equipping that item automatically applies the visual style.
+
+Use the command without visual name to remove the binding.
+
+Examples:
+
+- wear_bind MaceIron skeleton_mace: Replaces iron mace with the mace of Rancid remains.
+- wear_bind ShieldBlackmetal ShieldSerpentscale: Replaces Black metal shield with a Serpent scale shield.
+- wear_bind CapeLox CapeLinen 2: Replaces Lox Cape with a green Linen Cape.
+
+## wear_undo
+
+Reverts used wear_* commands.
+
+## wear_reset
+
+Resets visual styles (except bindings and trophies).
+
+# wear_info
+
+Displays item names of current visual styles.
+
+# wear_hair_color / wear_skin_color [r1,g1,b1] [r2,g2,b2] ...
+
+Sets color of hair or skin. If multiple colors are given then the color is automatically cycled with a smooth transition.
+
+Configuration can be used to change how long the colors last and how often they are updated.
+
+Examples:
+
+- wear_skin_color 1,0,0: Changes skin color to red.
+- wear_skin_color 10,0,0: Changes skin color to bright red.
+- wear_skin_color 10,0,0 0,10,0 0,0,10: Turns youn into a light show.
+
+# wear_hair / wear_beard [name]
+
+Sets hair or beard style. Autocomplete provides list of available names.
+
+# wear_* [name] [variant]
+
+Remaining commands change visual style of a gear slot.
+
+# Changelog
+- v1.0.0:
+	- Initial release
