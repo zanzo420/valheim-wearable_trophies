@@ -21,6 +21,10 @@ The changes done by the mod are also visible to un-modded clients.
 - Change hair or skin color, with automatic color cycling.
 - Bind visual style to specific equipment to automatically apply it.
 
+Visual style is applied per character. Commands also work in the character selection screen but without autocomplete ([wiki](https://valheim.fandom.com/wiki/Item_IDs) has a list of ids if needed).
+
+Visual style is set for all characters when using commands on the new character screen but this is not recommended.
+
 Note: Using some items can print warnings to the console but this should be harmless.
 
 # Commands
@@ -59,7 +63,7 @@ Examples:
 
 - wear_skin_color 1,0,0: Changes skin color to red.
 - wear_skin_color 10,0,0: Changes skin color to bright red.
-- wear_skin_color 10,0,0 0,10,0 0,0,10: Turns youn into a light show.
+- wear_skin_color 10,0,0 0,10,0 0,0,10: Turns you into a light show.
 
 # wear_hair / wear_beard [name]
 
@@ -70,5 +74,11 @@ Sets hair or beard style. Autocomplete provides list of available names.
 Remaining commands change visual style of a gear slot.
 
 # Changelog
+
+- v1.1.0:
+	- Added character specific configuration.
+	- Improved visuals on the character selection screen.
+	- Fixed conflict with EasySpawner (and probably some other mods too).
+
 - v1.0.0:
 	- Initial release

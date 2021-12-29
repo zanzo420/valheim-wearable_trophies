@@ -1,6 +1,6 @@
 {
   "name": "Wearable_Trophies",
-  "version_number": "1.0.1",
+  "version_number": "1.1.0",
   "website_url": "https://github.com/JereKuusela/valheim-wearable_trophies",
   "description": "Allows wearing trophies. Additonally commands can be used to wear any equipment.",
   "dependencies": [
