@@ -9,10 +9,10 @@ namespace Service {
   public class KeySetting {
 
     private Dictionary<string, ConfigEntry<string>> KeyToValue = new Dictionary<string, ConfigEntry<string>>();
-    private Dictionary<long, Dictionary<string, string>> Data = new Dictionary<long, Dictionary<string, string>>();
+    private Dictionary<string, Dictionary<string, string>> Data = new Dictionary<string, Dictionary<string, string>>();
 
     ///<summary>Tracks the loaded key to know when to reload settings.</summary>
-    private long LoadedKey = 0;
+    private string LoadedKey = "0";
     ///<summary>Needed to prevent pointless saving when loading.</summary>
     private bool IsLoading = false;
     ///<summary>The setting for persist/hydrate.</summary>
@@ -29,7 +29,7 @@ namespace Service {
 
     ///<summary>Loads and parses the data.</summary>
     private void Hydrate() {
-      Data = Setting.Value.Split('|').Select(str => str.Trim().Split('#')).Where(split => split.Length > 1).ToDictionary(split => long.Parse(split[0]), split => {
+      Data = Setting.Value.Split('|').Select(str => str.Trim().Split('#')).Where(split => split.Length > 1).ToDictionary(split => split[0], split => {
         return split[1].Split('¤').Select(str => str.Trim().Split(':')).Where(split => split.Length > 1).ToDictionary(split => split[0], split => split[1]);
       });
     }
@@ -44,13 +44,13 @@ namespace Service {
       return true;
     }
     ///<summary>Loads settings based on given key.</summary>
-    public void Load(long key) {
+    public void Load(string key) {
       if (key == LoadedKey) return;
       IsLoading = true;
       LoadedKey = key;
       var data = new Dictionary<string, string>();
-      if (Data.ContainsKey(0))
-        Data[0].ToList().ForEach(x => data[x.Key] = x.Value);
+      if (Data.ContainsKey("0"))
+        Data["0"].ToList().ForEach(x => data[x.Key] = x.Value);
       if (Data.ContainsKey(key))
         Data[key].ToList().ForEach(x => data[x.Key] = x.Value);
       foreach (var setting in KeyToValue.Values)

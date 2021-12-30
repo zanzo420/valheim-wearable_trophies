@@ -11,6 +11,6 @@ namespace Service {
       Instances.Add(this);
     }
 
-    public void Load(Player player) => Load(PlayerUtils.GetPlayerId(player));
+    public void Load(Player player) => Load(PlayerUtils.GetPlayerId(player).ToString());
   }
 }
