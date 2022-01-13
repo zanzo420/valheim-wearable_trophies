@@ -94,6 +94,12 @@ namespace WearableTrophies {
     private static bool IsLocalPlayer(VisEquipment vis) {
       if (!vis.m_isPlayer) return false;
       var player = vis.GetComponent<Player>();
+      if (!player) {
+        var ragdoll = vis.GetComponent<Ragdoll>();
+        if (Player.m_localPlayer?.m_ragdoll == ragdoll)
+          player = Player.m_localPlayer;
+      }
+      if (!player) return false;
       if (player.GetZDOID() != ZDOID.None && player != Player.m_localPlayer) return false;
       PlayerData.Load(player);
       return true;

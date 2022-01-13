@@ -2,7 +2,7 @@
 using HarmonyLib;
 
 namespace WearableTrophies {
-  [BepInPlugin("valheim.jerekuusela.wearable_trophies", "Wearable Trophies", "1.1.0.0")]
+  [BepInPlugin("valheim.jerekuusela.wearable_trophies", "Wearable Trophies", "1.2.0.0")]
   public class ESP : BaseUnityPlugin {
     public void Awake() {
       Harmony harmony = new Harmony("valheim.jerekuusela.wearable_trophies");

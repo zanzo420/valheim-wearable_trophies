@@ -75,6 +75,9 @@ Remaining commands change visual style of a gear slot.
 
 # Changelog
 
+- v1.2.0:
+	- Fixed critical error on player death (prevents tombstone).
+
 - v1.1.0:
 	- Added character specific configuration.
 	- Improved visuals on the character selection screen.
