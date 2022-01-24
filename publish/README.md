@@ -75,13 +75,16 @@ Remaining commands change visual style of a gear slot.
 
 # Changelog
 
-- v1.2.0:
+- v1.3:
+	- Fixed conflict with NPC mods (caused them to wear your equipment).
+
+- v1.2:
 	- Fixed critical error on player death (prevents tombstone).
 
-- v1.1.0:
+- v1.1:
 	- Added character specific configuration.
 	- Improved visuals on the character selection screen.
 	- Fixed conflict with EasySpawner (and probably some other mods too).
 
-- v1.0.0:
+- v1.0:
 	- Initial release

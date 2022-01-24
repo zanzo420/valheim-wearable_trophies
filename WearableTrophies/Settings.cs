@@ -94,9 +94,14 @@ namespace WearableTrophies {
     private static bool IsLocalPlayer(VisEquipment vis) {
       if (!vis.m_isPlayer) return false;
       var player = vis.GetComponent<Player>();
+      // Player visual equipment is also used by non-players:
+      // 1. Ragdoll when player dies.
+      // 2. NPCs from some mods.
       if (!player) {
+        // Ragdolls can be traced back to the player (if it's from the player).
         var ragdoll = vis.GetComponent<Ragdoll>();
-        if (Player.m_localPlayer?.m_ragdoll == ragdoll)
+        // Important to check that the ragdoll exists, otherwise NPCs will connect to the player (since their ragdolls are null).
+        if (ragdoll && Player.m_localPlayer?.m_ragdoll == ragdoll)
           player = Player.m_localPlayer;
       }
       if (!player) return false;
