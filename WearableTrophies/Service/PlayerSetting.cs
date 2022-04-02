@@ -1,16 +1,14 @@
 using System.Collections.Generic;
 using BepInEx.Configuration;
-namespace Service {
+namespace Service;
+///<summary>Provides player based settings.</summary>
+public class PlayerSetting : KeySetting {
 
-  ///<summary>Provides player based settings.</summary>
-  public class PlayerSetting : KeySetting {
+  public static List<PlayerSetting> Instances = new();
 
-    public static List<PlayerSetting> Instances = new List<PlayerSetting>();
-
-    public PlayerSetting(ConfigEntry<string> setting) : base(setting) {
-      Instances.Add(this);
-    }
-
-    public void Load(Player player) => Load(PlayerUtils.GetPlayerId(player).ToString());
+  public PlayerSetting(ConfigEntry<string> setting) : base(setting) {
+    Instances.Add(this);
   }
+
+  public void Load(Player player) => Load(PlayerUtils.GetPlayerId(player).ToString());
 }
