@@ -1,18 +1,12 @@
 # Wearable trophies
 
-This client side mod allows equipping trophies from the inventory.
+Allows equipping trophies from the inventory.
 
 Additionally includes commands to use visual style of most items (including NPC items) or change skin color.
 
-The changes done by the mod are also visible to un-modded clients.
+Install on the client (modding [guide](https://youtu.be/L9ljm2eKLrk)).
 
-
-# Manual Installation:
-
-1. Install the [BepInExPack Valheim](https://valheim.thunderstore.io/package/denikson/BepInExPack_Valheim)
-2. Download the latest zip
-3. Extract it in the \<GameDirectory\>\BepInEx\plugins\ folder.
-4. Optionally also install the [Configuration manager](https://github.com/BepInEx/BepInEx.ConfigurationManager/releases/tag/v16.4).
+The changes done by the mod are visible to un-modded clients.
 
 # Features
 
@@ -75,16 +69,19 @@ Remaining commands change visual style of a gear slot.
 
 # Changelog
 
-- v1.3:
+- v1.4
+	- Changes the GUID.
+
+- v1.3
 	- Fixed conflict with NPC mods (caused them to wear your equipment).
 
-- v1.2:
+- v1.2
 	- Fixed critical error on player death (prevents tombstone).
 
-- v1.1:
+- v1.1
 	- Added character specific configuration.
 	- Improved visuals on the character selection screen.
 	- Fixed conflict with EasySpawner (and probably some other mods too).
 
-- v1.0:
+- v1.0
 	- Initial release

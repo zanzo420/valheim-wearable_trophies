@@ -16,7 +16,7 @@ public class KeySetting {
   ///<summary>The setting for persist/hydrate.</summary>
   private ConfigEntry<string> Setting;
   ///<summary>Allows doing actions whenever the data changes.</summary>
-  public event Action DataChanged;
+  public event Action? DataChanged;
   public KeySetting(ConfigEntry<string> setting) {
     Setting = setting;
     Hydrate();
@@ -58,7 +58,7 @@ public class KeySetting {
         KeyToValue[kvp.Key].Value = kvp.Value;
     }
     IsLoading = false;
-    DataChanged.Invoke();
+    DataChanged?.Invoke();
   }
 
   ///<summary>Saves settings to the currently loaded key.</summary>
@@ -71,6 +71,6 @@ public class KeySetting {
     }
     Data[LoadedKey] = data;
     if (Persist())
-      DataChanged.Invoke();
+      DataChanged?.Invoke();
   }
 }

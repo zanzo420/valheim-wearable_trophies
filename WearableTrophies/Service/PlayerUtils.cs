@@ -3,8 +3,8 @@ namespace Service;
 ///<summary>Abstracts the currently loaded player (either in-game or in the menu).</summary>
 public static class PlayerUtils {
   public static long LoadedPlayerId = 0;
-  public static Player LoadedPlayer = null;
-  public static Player GetPlayer() => Player.m_localPlayer ?? LoadedPlayer;
+  public static Player? LoadedPlayer = null;
+  public static Player GetPlayer() => Player.m_localPlayer ?? LoadedPlayer!;
   public static long GetPlayerId(Player player) {
     var id = player.GetPlayerID();
     if (id == 0)

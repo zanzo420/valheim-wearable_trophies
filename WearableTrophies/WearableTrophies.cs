@@ -1,12 +1,27 @@
-﻿using BepInEx;
+﻿using System.IO;
+using BepInEx;
 using HarmonyLib;
 namespace WearableTrophies;
-[BepInPlugin("valheim.jerekuusela.wearable_trophies", "Wearable Trophies", "1.3.0.0")]
-public class ESP : BaseUnityPlugin {
+[BepInPlugin(GUID, NAME, VERSION)]
+public class WearableTrophies : BaseUnityPlugin {
+  public const string LEGACY_GUID = "valheim.jerekuusela.wearable_trophies";
+  public const string GUID = "wearable_trophies";
+  public const string NAME = "Wearable Trophies";
+  public const string VERSION = "1.4";
+
+  private void MigrateConfig() {
+    var legacyConfig = Path.Combine(Path.GetDirectoryName(Config.ConfigFilePath), $"{LEGACY_GUID}.cfg");
+    if (!File.Exists(legacyConfig)) return;
+    var config = Path.Combine(Path.GetDirectoryName(Config.ConfigFilePath), $"{GUID}.cfg");
+    if (File.Exists(config))
+      File.Delete(legacyConfig);
+    else
+      File.Move(legacyConfig, config);
+  }
   public void Awake() {
-    Harmony harmony = new("valheim.jerekuusela.wearable_trophies");
-    harmony.PatchAll();
+    MigrateConfig();
     Settings.Init(Config);
+    new Harmony(GUID).PatchAll();
   }
 }
 

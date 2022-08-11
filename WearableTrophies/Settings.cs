@@ -6,6 +6,7 @@ using Service;
 using UnityEngine;
 namespace WearableTrophies;
 public class Settings {
+#nullable disable
   public static ConfigEntry<string> configOverride;
   public static ConfigEntry<string> configVisualHelmet;
   public static ConfigEntry<string> configVisualChest;
@@ -22,12 +23,13 @@ public class Settings {
   public static ConfigEntry<string> configVisualHairColor;
   public static ConfigEntry<string> configColorDuration;
   public static ConfigEntry<string> configColorUpdateInterval;
+  public static ConfigEntry<string> configPlayerData;
+  public static PlayerSetting PlayerData;
+#nullable enable
   public static float ColorUpdateInterval => Helper.TryFloat(configColorUpdateInterval.Value, 0.1f);
   public static float ColorDuration => Helper.TryFloat(configColorDuration.Value, 1.0f);
-  public static ConfigEntry<string> configPlayerData;
 
   public static Dictionary<string, Tuple<string, int>> Overrides = new();
-  public static PlayerSetting PlayerData;
   public static void Init(ConfigFile config) {
     var section = "Visual visuals";
     configPlayerData = config.Bind(section, "Player based values", "", new ConfigDescription("Stores values per player.", null, new ConfigurationManagerAttributes { Browsable = false }));

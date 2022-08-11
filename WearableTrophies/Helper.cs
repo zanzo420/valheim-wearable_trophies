@@ -13,7 +13,7 @@ public static class Helper {
     if (items == null) return;
     foreach (var item in items.Where(Helper.IsTrophy)) item.m_equiped = false;
   }
-  public static ItemDrop.ItemData GetEquippedTrophy(Inventory inventory) {
+  public static ItemDrop.ItemData? GetEquippedTrophy(Inventory? inventory) {
     if (inventory == null) return null;
     var items = inventory.m_inventory;
     if (items == null) return null;
