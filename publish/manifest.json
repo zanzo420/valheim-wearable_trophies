@@ -1,8 +1,8 @@
 {
   "name": "Wearable_Trophies",
-  "version_number": "1.4.0",
+  "version_number": "1.5.0",
   "website_url": "https://github.com/JereKuusela/valheim-wearable_trophies",
-  "description": "Allows wearing trophies. Additonally commands can be used to wear any equipment.",
+  "description": "Allows wearing trophie.",
   "dependencies": [
     "denikson-BepInExPack_Valheim-5.4.1901"
   ]

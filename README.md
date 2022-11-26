@@ -1,9 +1,19 @@
-# valheim-ruler
+# Wearable trophies
 
-This project is an utility mod to game called Valheim.
+Allows equipping trophies from the inventory.
 
-To compile, you need to manually add correct libraries to Libs folder. Check project file for needed ones.
+Install on the client (modding [guide](https://youtu.be/L9ljm2eKLrk)).
 
-- Download BepInEx for Valheim and use DLLs from core and unstripped_corlib folders.
-- Valheim DLLs can be found from Valheim_Data/Manageed folder.
-- DLLS which end with _publicized require using https://github.com/CabbageCrow/AssemblyPublicizer.
+The changes done by the mod are visible to un-modded clients.
+
+# Features
+
+Equip any tropby from the inventory to visually replace the helmet (while still keeping the stats).
+
+Note: Using some items can print warnings to the console but this should be harmless.
+
+# Credits
+
+Sources: [GitHub](https://github.com/JereKuusela/valheim-wearable_trophies)
+
+Donations: [Buy me a computer](https://www.buymeacoffee.com/jerekuusela)
