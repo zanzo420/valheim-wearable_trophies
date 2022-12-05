@@ -21,7 +21,7 @@ Donations: [Buy me a computer](https://www.buymeacoffee.com/jerekuusela)
 # Changelog
 
 - v1.5
-	- Removes custom styles as obsolote (split to Vanity mod).
+	- Removes custom styles as obsolete (split to Vanity mod).
 
 - v1.4
 	- Changes the GUID.
