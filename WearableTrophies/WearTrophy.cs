@@ -3,9 +3,9 @@ namespace WearableTrophies;
 ///<summary>Makes visual helmet slot count as equipped.</summary>
 [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.IsItemEquiped))]
 public class IsItemEquiped {
-  static void Postfix(Humanoid __instance, ItemDrop.ItemData item, ref bool __result) {
+  static void Postfix(ItemDrop.ItemData item, ref bool __result) {
     if (__result || !Helper.IsTrophy(item)) return;
-    __result = item.m_equiped && !EquipIventoryItems.ForceTrophiesUnequipped;
+    __result = item.m_equipped && !EquipInventoryItems.ForceTrophiesUnequipped;
   }
 }
 
@@ -24,7 +24,7 @@ public class EquipItem {
   static void Postfix(Humanoid __instance, ItemDrop.ItemData item, bool __result) {
     if (!__result || !Helper.IsTrophy(item)) return;
     Helper.UnequipTrophies(__instance.m_inventory);
-    item.m_equiped = true;
+    item.m_equipped = true;
     __instance.SetupEquipment();
   }
 }
@@ -33,7 +33,7 @@ public class EquipItem {
 public class UnequipItem {
   static void Postfix(Humanoid __instance, ItemDrop.ItemData item) {
     if (!Helper.IsTrophy(item)) return;
-    item.m_equiped = false;
+    item.m_equipped = false;
     __instance.SetupEquipment();
   }
 }
@@ -45,8 +45,8 @@ public class UnequipAllItems {
   }
 }
 ///<summary>Prevents the trophy being unequipped.</summary>
-[HarmonyPatch(typeof(Player), nameof(Player.EquipIventoryItems))]
-public class EquipIventoryItems {
+[HarmonyPatch(typeof(Player), nameof(Player.EquipInventoryItems))]
+public class EquipInventoryItems {
   public static bool ForceTrophiesUnequipped = false;
   static void Prefix() {
     ForceTrophiesUnequipped = true;
