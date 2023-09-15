@@ -38,5 +38,4 @@
       <HintPath>..\..\Libs\assembly_utils_publicized.dll</HintPath>
     </Reference>
   </ItemGroup>
-
 </Project>

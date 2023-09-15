@@ -6,13 +6,13 @@ Install on the client (modding [guide](https://youtu.be/L9ljm2eKLrk)).
 
 The changes done by the mod are visible to un-modded clients.
 
-# Features
+## Features
 
-Equip any trophy from the inventory to visually replace the helmet (while still keeping the stats).
+Equip any trophy (with shift key pressed) from the inventory to visually replace the helmet (while still keeping the stats).
 
 Note: Using some items can print warnings to the console but this should be harmless.
 
-# Credits
+## Credits
 
 Sources: [GitHub](https://github.com/JereKuusela/valheim-wearable_trophies)
 
