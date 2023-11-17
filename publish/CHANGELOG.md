@@ -1,3 +1,6 @@
+- v1.8
+  - Adds support for equipping any gear.
+
 - v1.7
   - Shift key is now required for equipping (compatibility with Useful Trophies mod and allows using them on altars).
 

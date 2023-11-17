@@ -1,9 +1,9 @@
 {
   "name": "Wearable_Trophies",
-  "version_number": "1.7.0",
+  "version_number": "1.8.0",
   "website_url": "https://github.com/JereKuusela/valheim-wearable_trophies",
-  "description": "Allows wearing trophie.",
+  "description": "Allows wearing trophies and other gear as style.",
   "dependencies": [
-    "denikson-BepInExPack_Valheim-5.4.2105"
+    "denikson-BepInExPack_Valheim-5.4.2200"
   ]
 }
