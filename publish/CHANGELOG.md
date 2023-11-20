@@ -1,5 +1,7 @@
 - v1.8
-  - Adds support for equipping any gear.
+  - Adds support for vanity armor and weapons.
+  - Adds configurable key bindings.
+  - Adds server synced configuration to select allowed vanity items.
 
 - v1.7
   - Shift key is now required for equipping (compatibility with Useful Trophies mod and allows using them on altars).

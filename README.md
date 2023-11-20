@@ -8,7 +8,7 @@ The changes done by the mod are visible to un-modded clients.
 
 ## Features
 
-Equip any trophy or gear (with shift key pressed) from the inventory to visually replace the equipment (while still keeping the stats).
+Equip any trophy or gear as cosmetic style, while keeping the stats from the original item.
 
 Note: Using some items can print warnings to the console but this should be harmless.
 
