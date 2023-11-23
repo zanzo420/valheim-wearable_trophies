@@ -11,8 +11,8 @@ public class SetupVisEquipment
     if (!Helper.IsLocalPlayer(__instance)) return;
     SetEquipment.IsHidden = __instance.m_hiddenLeftItem != null || __instance.m_hiddenRightItem != null;
   }
-
 }
+
 [HarmonyPatch(typeof(VisEquipment))]
 public class SetEquipment
 {

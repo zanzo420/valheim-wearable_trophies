@@ -81,9 +81,9 @@ public class Configuration
     configAllowArmor.SettingChanged += (s, e) => Helper.UpdateVisEqupment();
     configAllowBackWeapons = wrapper.Bind(section, "Allow back weapons", true, "Back weapons can be set separately.");
     configAllowBackWeapons.SettingChanged += (s, e) => Helper.UpdateVisEqupment();
-    configAllowForce = wrapper.Bind(section, "Allow forcing gear", false, "Gear can be used on wrong slots.");
+    configAllowForce = wrapper.Bind(section, "Allow forcing gear", true, "Gear can be used on any slot.");
     configAllowForce.SettingChanged += (s, e) => Helper.UpdateVisEqupment();
-    configAllowForceAnyItem = wrapper.Bind(section, "Allow forcing any item", false, "Any item can be used on wrong slots.");
+    configAllowForceAnyItem = wrapper.Bind(section, "Allow forcing any item", true, "Any item can be used on any slot.");
     configAllowForceAnyItem.SettingChanged += (s, e) => Helper.UpdateVisEqupment();
     section = "Not synced";
     configShowKeyHints = configFile.Bind(section, "Show key hints", true, "If enabled, key binds are show on tooltips.");
