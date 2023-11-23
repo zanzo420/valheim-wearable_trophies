@@ -86,7 +86,7 @@ public class Configuration
     configAllowForceAnyItem = wrapper.Bind(section, "Allow forcing any item", true, "Any item can be used on any slot.");
     configAllowForceAnyItem.SettingChanged += (s, e) => Helper.UpdateVisEqupment();
     section = "Not synced";
-    configShowKeyHints = configFile.Bind(section, "Show key hints", true, "If enabled, key binds are show on tooltips.");
+    configShowKeyHints = configFile.Bind(section, "Show key hints", true, "If enabled, key binds are shown on tooltips.");
     configStyleKey = configFile.Bind(section, "Style key", new KeyboardShortcut(KeyCode.LeftShift), "Key to equip as style.");
     configLeftHandKey = configFile.Bind(section, "Left hand key", new KeyboardShortcut(KeyCode.LeftControl), "Key to equip weapon to the left hand.");
     configRightBackKey = configFile.Bind(section, "Right back key", new KeyboardShortcut(KeyCode.LeftShift, KeyCode.LeftAlt), "Key to equip weapon to the right back.");
