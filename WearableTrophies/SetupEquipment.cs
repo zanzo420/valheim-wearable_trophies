@@ -1,5 +1,6 @@
 
 using HarmonyLib;
+using UnityEngine;
 
 namespace WearableTrophies;
 
@@ -84,3 +85,22 @@ public class SetEquipment
     SetItem(VanityEquipment.GetUtility(), ref name);
   }
 }
+
+/* Interesting idea but most items don't have attach points for wielding anyways.
+[HarmonyPatch(typeof(ZNetScene), nameof(ZNetScene.Awake))]
+public class ZNetSceneAwake
+{
+  static void Postfix(ZNetScene __instance)
+  {
+    var defaultSprite = __instance.m_namedPrefabs["SwordCheat".GetStableHashCode()].GetComponent<ItemDrop>().m_itemData.m_shared.m_icons[0];
+    foreach (var item in __instance.m_namedPrefabs.Values)
+    {
+      if (item.TryGetComponent(out ItemDrop itemDrop))
+      {
+        var icons = itemDrop.m_itemData.m_shared.m_icons;
+        if (icons == null || icons.Length == 0) itemDrop.m_itemData.m_shared.m_icons = [defaultSprite];
+      }
+    }
+  }
+}
+*/
